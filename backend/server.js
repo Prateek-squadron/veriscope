@@ -14,9 +14,11 @@ const { errorHandler, notFound } = require('./middleware/errorHandler');
 // Import route handlers
 const authRoutes = require('./routes/authRoutes');
 const contentRoutes = require('./routes/contentRoutes');
+const aiRoutes = require('./routes/aiRoutes');
 
 // Initialize Express application
 const app = express();
+// AI integration restart trigger
 
 // Connect to MongoDB database
 connectDB();
@@ -66,6 +68,7 @@ if (process.env.NODE_ENV === 'development') {
 // API Routes
 app.use('/api/auth', authRoutes);      // Authentication routes: /api/auth/*
 app.use('/api/content', contentRoutes);  // Content verification routes: /api/content/*
+app.use('/api/ai', aiRoutes);          // AI analysis routes: /api/ai/*
 
 // Health check endpoint
 app.get('/api/health', (_req, res) => {
@@ -95,6 +98,13 @@ app.get('/api', (_req, res) => {
         getResult: 'GET /api/content/:id',
         history: 'GET /api/content/history',
         delete: 'DELETE /api/content/:id'
+      },
+      aiScanning: {
+        scan: 'POST /api/content/scan',
+        getScanResult: 'GET /api/content/scan/:id',
+        scanHistory: 'GET /api/content/scan/history',
+        scanStats: 'GET /api/content/scan/stats',
+        deleteScan: 'DELETE /api/content/scan/:id'
       },
       utility: {
         health: 'GET /api/health',

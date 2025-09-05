@@ -23,7 +23,7 @@ const Footer = () => {
               <span className="text-xl font-bold">VeriScope</span>
             </div>
             <p className="text-gray-300 dark:text-gray-400 mb-4 max-w-md">
-              Advanced content verification platform powered by AI technology. 
+              Advanced content verification platform powered by ExpressOPS. 
               Helping users identify trustworthy information in the digital age.
             </p>
             <p className="text-sm text-gray-400 dark:text-gray-500">
@@ -154,7 +154,7 @@ const Footer = () => {
           {/* Additional Info */}
           <div className="mt-4 text-center">
             <p className="text-xs text-gray-500 dark:text-gray-600">
-              Built with React & Tailwind CSS | Powered by AI Technology
+              Built with Mern Stack | Powered by AI Technology
             </p>
           </div>
         </div>

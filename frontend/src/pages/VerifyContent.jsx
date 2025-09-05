@@ -62,6 +62,9 @@ const VerifyContent = () => {
       if (formData.text.trim().length < 10) {
         return 'Text must be at least 10 characters long';
       }
+      if (formData.text.trim().length > 2000) {
+        return 'AI analysis cannot exceed 2,000 characters';
+      }
     } else if (activeTab === 'url') {
       if (!formData.url.trim()) {
         return 'Please enter a URL to verify';
@@ -232,9 +235,18 @@ const VerifyContent = () => {
                   placeholder="Paste the text content you want to verify here..."
                   disabled={loading}
                 />
-                <p className="mt-1 text-sm text-gray-500">
-                  Minimum 10 characters required. Maximum 10,000 characters.
-                </p>
+                <div className="flex justify-between items-center mt-1">
+                  <p className="text-sm text-gray-500">
+                    Minimum 10 characters required. Maximum 2,000 characters.
+                  </p>
+                  <p className={`text-sm ${
+                    formData.text.length > 2000 ? 'text-red-600' : 
+                    formData.text.length > 1800 ? 'text-yellow-600' : 
+                    'text-gray-500'
+                  }`}>
+                    {formData.text.length}/2,000
+                  </p>
+                </div>
               </div>
             )}
 
