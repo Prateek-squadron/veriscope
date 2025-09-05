@@ -15,7 +15,10 @@
       "Bash(npm run build:*)",
       "Bash(npm run dev:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(npx kill-port:*)"
+      "Bash(npx kill-port:*)",
+      "Bash(del \"C:\\veriscope\\vercel.json\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
