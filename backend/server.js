@@ -51,7 +51,7 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Request logging middleware (development only)
 if (process.env.NODE_ENV === 'development') {
-  app.use((req, res, next) => {
+  app.use((req, _res, next) => {
     console.log(`🌐 ${req.method} ${req.path} - ${new Date().toISOString()}`);
     if (req.body && Object.keys(req.body).length > 0) {
       const bodyToLog = { ...req.body };
@@ -68,7 +68,7 @@ app.use('/api/auth', authRoutes);      // Authentication routes: /api/auth/*
 app.use('/api/content', contentRoutes);  // Content verification routes: /api/content/*
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (_req, res) => {
   res.status(200).json({
     success: true,
     message: 'VeriScope API is running',
@@ -78,7 +78,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // API documentation endpoint
-app.get('/api', (req, res) => {
+app.get('/api', (_req, res) => {
   res.status(200).json({
     success: true,
     message: 'Welcome to VeriScope API',

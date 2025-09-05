@@ -10,7 +10,12 @@
       "Bash(curl:*)",
       "Read(/C:\\veriscope\\frontend\\src/**)",
       "Bash(dir C:veriscopefrontendsrc)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(tasklist:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(npx kill-port:*)"
     ],
     "deny": [],
     "ask": []
