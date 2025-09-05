@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(mongo:*)",
+      "Bash(npm start)",
+      "Bash(PORT=3001 npm start)",
+      "Bash(curl:*)",
+      "Read(/C:\\veriscope\\frontend\\src/**)",
+      "Bash(dir C:veriscopefrontendsrc)",
+      "Bash(node:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

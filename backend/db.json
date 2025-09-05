@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "test@example.com",
+      "password": "123456",
+      "name": "Test User",
+      "token": "dummy-jwt-token"
+    }
+  ],
+  "history": [
+    {
+      "id": 1,
+      "content": "https://example.com",
+      "trustScore": 70,
+      "date": "2025-09-03"
+    }
+  ]
+}

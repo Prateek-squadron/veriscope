@@ -1,0 +1,6 @@
+{
+  "/api/auth/register": "/users",
+  "/api/auth/login": "/users",
+  "/api/content/history": "/history",
+  "/api/content/verify": "/history"
+}

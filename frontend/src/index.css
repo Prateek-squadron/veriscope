@@ -1,0 +1,206 @@
+/* Import Tailwind CSS base, components, and utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS overrides and additional styles */
+
+/* Base styles for better typography and spacing */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Ensure consistent button styling */
+  button {
+    font-family: inherit;
+  }
+
+  /* Better focus outline for accessibility */
+  *:focus-visible {
+    outline: 2px solid #3B82F6;
+    outline-offset: 2px;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  /* Loading spinner animation */
+  .animate-spin-slow {
+    animation: spin 2s linear infinite;
+  }
+
+  /* Custom scrollbar styles for webkit browsers */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+
+  /* Form input styles with better focus states */
+  .form-input {
+    @apply appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200;
+  }
+
+  .form-input.error {
+    @apply border-red-300 focus:ring-red-500;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500;
+  }
+
+  /* Card components */
+  .card {
+    @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300;
+  }
+
+  /* Badge components */
+  .badge-green {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800;
+  }
+
+  .badge-yellow {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800;
+  }
+
+  .badge-red {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800;
+  }
+
+  /* Alert components */
+  .alert-error {
+    @apply bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg;
+  }
+
+  .alert-success {
+    @apply bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg;
+  }
+
+  .alert-warning {
+    @apply bg-yellow-50 border border-yellow-200 text-yellow-600 px-4 py-3 rounded-lg;
+  }
+
+  .alert-info {
+    @apply bg-blue-50 border border-blue-200 text-blue-600 px-4 py-3 rounded-lg;
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  /* Text gradient utility */
+  .text-gradient {
+    background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  /* Custom animations */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Responsive text sizing */
+  .text-responsive {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+
+  /* Safe area padding for mobile devices */
+  .safe-padding {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .btn-primary {
+    @apply border-2 border-blue-800;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
