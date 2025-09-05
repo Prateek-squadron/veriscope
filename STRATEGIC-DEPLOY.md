@@ -10,7 +10,7 @@
 git status
 git add .
 git commit -m "Pre-deployment: Ready for zero-cost hosting"
-git push origin main
+git push origin master
 ```
 
 2. **Local Test (Before Deployment)**
