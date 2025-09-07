@@ -14,7 +14,13 @@ const seedUsers = async () => {
     await connectDB();
 
     // Clear existing users (optional - comment out to keep existing users)
-    // await User.deleteMany({});
+    console.log('🧹 Clearing existing demo users to ensure fresh credentials...');
+    await User.deleteMany({
+      $or: [
+        { email: { $in: ['demo@veriscope.com', 'test@veriscope.com', 'john@example.com', 'jane@example.com'] } },
+        { username: { $in: ['demo', 'testuser', 'john_doe', 'jane_smith'] } }
+      ]
+    });
     
     // Demo users to create
     const users = [
