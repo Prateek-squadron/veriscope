@@ -29,7 +29,12 @@ const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:3001', 
   process.env.CLIENT_URL,
-  // Add your Vercel domain here when deployed
+  // Common Vercel deployment patterns
+  'https://veriscope.vercel.app',
+  'https://veriscope-git-master.vercel.app',
+  'https://veriscope-prateek-squadron.vercel.app',
+  // Pattern for Vercel preview deployments
+  /^https:\/\/veriscope.*\.vercel\.app$/
 ].filter(Boolean);
 
 app.use(cors({
@@ -37,12 +42,25 @@ app.use(cors({
     // Allow requests with no origin (mobile apps, curl, Postman)
     if (!origin) return callback(null, true);
     
+    // Check exact matches first
     if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.log('CORS blocked origin:', origin);
-      callback(new Error('Not allowed by CORS'));
+      return callback(null, true);
     }
+    
+    // Check regex patterns for Vercel deployments
+    const regexMatch = allowedOrigins.some(allowed => {
+      if (allowed instanceof RegExp) {
+        return allowed.test(origin);
+      }
+      return false;
+    });
+    
+    if (regexMatch) {
+      return callback(null, true);
+    }
+    
+    console.log('CORS blocked origin:', origin);
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true // Allow cookies and authorization headers
 }));
