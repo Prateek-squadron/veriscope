@@ -88,11 +88,16 @@ const Register = () => {
 
     // Validate form
     const validationErrors = validateForm();
+    console.log('🔍 Form validation result:', validationErrors);
+    
     if (Object.keys(validationErrors).length > 0) {
+      console.log('❌ Form validation failed:', validationErrors);
       setErrors(validationErrors);
       setLoading(false);
       return;
     }
+    
+    console.log('✅ Form validation passed');
 
     try {
       // Prepare registration data
@@ -102,27 +107,41 @@ const Register = () => {
         password: formData.password
       };
 
+      console.log('🚀 Attempting registration with data:', {
+        username: registrationData.username,
+        email: registrationData.email,
+        passwordLength: registrationData.password.length
+      });
+
       // Make registration API call
       const response = await authAPI.register(registrationData);
+
+      console.log('✅ Registration response:', response.data);
 
       if (response.data.success) {
         // Store token and user data
         tokenUtils.saveToken(response.data.data.token);
         userUtils.saveUser(response.data.data.user);
 
+        console.log('✅ Registration successful, redirecting to dashboard');
         // Redirect to dashboard
         navigate('/dashboard', { replace: true });
       } else {
+        console.log('❌ Registration failed:', response.data.message);
         setErrors({ general: response.data.message || 'Registration failed' });
       }
     } catch (err) {
-      console.error('Registration error:', err);
+      console.error('❌ Registration error:', err);
+      console.error('❌ Error response:', err.response?.data);
+      console.error('❌ Error status:', err.response?.status);
       
       // Handle different types of errors
       if (err.response?.data?.message) {
         setErrors({ general: err.response.data.message });
       } else if (err.response?.status === 400) {
         setErrors({ general: 'Invalid registration data. Please check your inputs.' });
+      } else if (err.code === 'ECONNREFUSED' || err.message.includes('Network Error')) {
+        setErrors({ general: 'Cannot connect to server. Please make sure the backend is running.' });
       } else {
         setErrors({ general: 'Registration failed. Please try again later.' });
       }
