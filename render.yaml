@@ -16,5 +16,8 @@ services:
         sync: false
       - key: JWT_SECRET
         sync: false
+      # Do NOT commit secrets. Set HUGGING_FACE_API_KEY in Render dashboard.
+      - key: HUGGING_FACE_API_KEY
+        sync: false
       - key: CLIENT_URL
-        value: https://veriscope.vercel.app
+        value: https://veriscope-azure.vercel.app/

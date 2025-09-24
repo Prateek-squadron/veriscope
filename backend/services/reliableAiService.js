@@ -8,6 +8,7 @@ class ReliableAiService {
   constructor() {
     this.openaiApiKey = process.env.OPENAI_API_KEY;
     this.anthropicApiKey = process.env.ANTHROPIC_API_KEY;
+    this.huggingFaceApiKey = process.env.HUGGING_FACE_API_KEY;
     
     // Multiple Hugging Face models for ensemble voting
     this.huggingFaceModels = [
@@ -45,6 +46,10 @@ class ReliableAiService {
     
     // API endpoints
     this.huggingFaceBase = 'https://api-inference.huggingface.co/models/';
+
+    if (!this.huggingFaceApiKey) {
+      console.warn('⚠️  HUGGING_FACE_API_KEY not found; Hugging Face calls may fail.');
+    }
   }
 
   /**
@@ -418,7 +423,10 @@ class ReliableAiService {
       }
       
       const response = await axios.post(url, requestData, {
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(this.huggingFaceApiKey ? { 'Authorization': `Bearer ${this.huggingFaceApiKey}` } : {})
+        },
         timeout: 10000
       });
 

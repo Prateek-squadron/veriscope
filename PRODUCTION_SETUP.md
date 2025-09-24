@@ -14,6 +14,13 @@
 - **Problem**: Render deployment had missing/incorrect environment variables
 - **Fix**: Updated `render.yaml` with proper PORT and CLIENT_URL settings
 
+### 4. Database Separation
+- **Problem**: Local development and production sharing same MongoDB database
+- **Issues**: Data conflicts, user registration conflicts, test data pollution
+- **Fix**: Separate databases for each environment:
+  - **Development**: `veriscope-dev` database
+  - **Production**: `veriscope-production` database
+
 ## Production Deployment Steps
 
 ### Step 1: Deploy Backend to Render
@@ -32,9 +39,9 @@
    ```
    NODE_ENV=production
    PORT=10000
-   MONGODB_URI=mongodb+srv://veriscope-user:5TevzFyzzvmm3RBN@veriscope-cluster.xlyfvx5.mongodb.net/veriscope?retryWrites=true&w=majority&appName=veriscope-cluster
+   MONGODB_URI=mongodb+srv://veriscope-user:5TevzFyzzvmm3RBN@veriscope-cluster.xlyfvx5.mongodb.net/veriscope-production?retryWrites=true&w=majority&appName=veriscope-cluster
    JWT_SECRET=veriscope_super_secret_jwt_key_2024_make_it_long_and_complex_for_security
-   CLIENT_URL=https://veriscope.vercel.app
+   CLIENT_URL=https://veriscope-azure.vercel.app
    ```
 
 5. **Deploy**: Render will automatically deploy from your GitHub repository
